@@ -24,6 +24,20 @@ let drawing = false;
 
 var btn = document.getElementById('reset-button')
 
+function draw(item){
+    item.addEventListener('mousedown',()=>{
+        drawing = true;
+        item.classList.add('grid-hover');
+    })
+    item.addEventListener('mousemove',()=>{
+        if(!drawing) return;
+        item.classList.add('grid-hover');
+    })
+    item.addEventListener('mouseup',()=>{
+        drawing=false;
+    })
+}
+
 function createCanvas(num){
     let canvasSize = num * num;
     for(var i = 0; i < canvasSize; i++){
@@ -32,18 +46,7 @@ function createCanvas(num){
         newC.style.flex =`1 0 calc(100% / ${num})`
         newC.style.height =`calc(100% / ${num})`
         container.appendChild(newC);
-
-        newC.addEventListener('mousedown',()=>{
-            drawing = true;
-            newC.classList.add('grid-hover');
-        })
-        newC.addEventListener('mousemove',()=>{
-            if(!drawing) return;
-            newC.classList.add('grid-hover');
-        })
-        newC.addEventListener('mouseup',()=>{
-            drawing=false;
-        })
+        draw(newC);
     }
 }
 
