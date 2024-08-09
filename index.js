@@ -59,6 +59,12 @@ btn.addEventListener('click',()=>{
 
 
 
+var colorInput = document.getElementById('color');
+var btn = document.getElementById('test');
+
+btn.addEventListener('click',()=>{
+    
+})
 
 
 
