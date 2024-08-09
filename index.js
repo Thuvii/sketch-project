@@ -22,24 +22,38 @@
 var container = document.getElementById('container')
 let drawing = false;
 
+var colorInput = document.getElementById('color');
+
+var size = document.getElementById('size');
+var enterBtn = document.getElementById('confirm');
+
+
+
+
 var btn = document.getElementById('reset-button')
 
 function draw(item){
     item.addEventListener('mousedown',()=>{
         drawing = true;
-        item.classList.add('grid-hover');
+        item.style.backgroundColor = colorInput.value
     })
     item.addEventListener('mousemove',()=>{
         if(!drawing) return;
-        item.classList.add('grid-hover');
+        item.style.backgroundColor = colorInput.value
+
     })
     item.addEventListener('mouseup',()=>{
         drawing=false;
     })
+    btn.addEventListener('click',()=>{
+       item.style.backgroundColor = '#ffff';
+    })
+
 }
 
 function createCanvas(num){
     let canvasSize = num * num;
+    container.innerHTML = '';
     for(var i = 0; i < canvasSize; i++){
         const newC = document.createElement('div');
         newC.classList.add('grid');
@@ -47,24 +61,30 @@ function createCanvas(num){
         newC.style.height =`calc(100% / ${num})`
         container.appendChild(newC);
         draw(newC);
+        
     }
 }
 
-createCanvas(40)
+size.addEventListener('input',(e)=>{
 
-btn.addEventListener('click',()=>{
-    var grid = document.querySelectorAll('#container div')
-    grid.forEach(element => element.classList.remove("grid-hover"));
-})
-
-
-
-var colorInput = document.getElementById('color');
-var btn = document.getElementById('test');
-
-btn.addEventListener('click',()=>{
+    var newsize = parseInt(size.value)
+    
+        if(newsize > 100 ) {
+            alert('please enter number smaller or equal 100')
+            size.value = '';
+            return;
+        }else if(isNaN(newsize)){
+            return;
+        }
+        createCanvas(size.value);
+    
     
 })
+
+
+
+
+
 
 
 
