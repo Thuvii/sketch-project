@@ -58,4 +58,6 @@ label #color{
     color: 	#1d1a2f;
     
 }
-
+::placeholder {
+  color: #1d1a2f;
+}
